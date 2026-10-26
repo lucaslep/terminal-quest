@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Quest // Cyberpunk RPG</title>
+    <!-- Fonte retro/cyberpunk monospace do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cyber-scanlines"></div>
+
+    <div class="app-container">
+        <!-- BARRA SUPERIOR / HEADER DO SISTEMA -->
+        <header class="cyber-header">
+            <div class="terminal-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+                <span class="system-title">NEXUS_OS v2.4.0 [AGENTE_WORKSPACE]</span>
+            </div>
+            <div class="header-actions">
+                <span id="systemClock" class="system-clock">00:00:00</span>
+                <button id="toggleAudioBtn" class="cyber-btn-small" title="Alternar som">
+                    <span id="audioIcon">🔊</span> SOM: <span id="audioStatusText">ON</span>
+                </button>
+                <button id="resetGameBtn" class="cyber-btn-small danger" title="Reiniciar progresso do jogo">
+                    REINICIAR
+                </button>
+            </div>
+        </header>
+
+        <!-- CORPO PRINCIPAL: TERMINAL + HUD LATERAL -->
+        <main class="main-layout">
+            <!-- PAINEL DO TERMINAL -->
+            <section class="terminal-panel" id="terminalWindow">
+                <div class="terminal-output" id="terminalOutput">
+                    <!-- As mensagens, logs e respostas dos comandos aparecerão aqui dinamicamente -->
+                </div>
+
+                <!-- LINHA DE PROMPT / ENTRADA DE COMANDOS -->
+                <div class="terminal-prompt-bar">
+                    <span class="prompt-user" id="promptLabel">agente@nexus:<span id="currentPathLabel">~</span>$&nbsp;</span>
+                    <input 
+                        type="text" 
+                        id="commandInput" 
+                        class="terminal-input" 
+                        placeholder="Digite um comando (digite 'help' para comandos)..." 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        autofocus
+                    >
+                    <button type="button" id="executeButton" class="cyber-btn">EXEC</button>
+                </div>
+            </section>
+
+            <!-- PAINEL LATERAL (HUD / STATUS / MISSÕES) -->
+            <aside class="hud-panel">
+                <!-- CARD DO PERFIL DO AGENTE -->
+                <div class="cyber-card">
+                    <div class="card-header">
+                        <h3>// PERFIL DO OPERADOR</h3>
+                    </div>
+                    <div class="card-body profile-section">
+                        <div class="avatar-box">
+                            <span class="avatar-icon">⚡</span>
+                        </div>
+                        <div class="profile-info">
+                            <p class="agent-name">Codinome: <strong id="hudCodename">Agente-0</strong></p>
+                            <p class="agent-rank">Patente: <span id="hudRank" class="badge">Iniciante</span></p>
+                            <p class="agent-level">Nível: <strong id="hudLevel">1</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE XP -->
+                    <div class="xp-section">
+                        <div class="xp-labels">
+                            <span>EXP: <span id="hudXpCurrent">0</span> / <span id="hudXpNext">100</span></span>
+                            <span id="hudXpPercent">0%</span>
+                        </div>
+                        <div class="xp-progress-bar">
+                            <div class="xp-fill" id="hudXpBar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD DA MISSÃO ATUAL -->
+                <div class="cyber-card quest-card">
+                    <div class="card-header">
+                        <h3>// MISSÃO ATIVA</h3>
+                        <span class="pulse-indicator"></span>
+                    </div>
+                    <div class="card-body">
+                        <h4 id="hudQuestTitle" class="quest-title">Carregando missão...</h4>
+                        <p id="hudQuestDesc" class="quest-desc">Inicializando protocolo neural...</p>
+                        
+                        <div class="quest-objectives">
+                            <p class="obj-label">OBJETIVOS:</p>
+                            <ul id="hudQuestObjectives" class="objectives-list">
+                                <!-- Preenchido dinamicamente via JS -->
+                            </ul>
+                        </div>
+
+                        <div class="quest-reward">
+                            <span>Recompensa: <strong id="hudQuestReward">+100 XP</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTÕES DE ATALHOS RÁPIDOS -->
+                <div class="cyber-card shortcuts-card">
+                    <div class="card-header">
+                        <h3>// ATALHOS RÁPIDOS</h3>
+                    </div>
+                    <div class="shortcuts-grid">
+                        <button class="shortcut-chip" data-cmd="help">help</button>
+                        <button class="shortcut-chip" data-cmd="ls">ls</button>
+                        <button class="shortcut-chip" data-cmd="status">status</button>
+                        <button class="shortcut-chip" data-cmd="clear">clear</button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- SCRIPT PRINCIPAL DO JOGO -->
+    <script src="script.js"></script>
+</body>
+</html>
